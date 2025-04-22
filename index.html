@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ILU💔</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+ 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Quicksand', sans-serif;
+      height: 100%;
+      background: linear-gradient(120deg, #ffdde1, #ee9ca7);
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 1s ease-in-out;
+      position: relative;
+      padding: 20px;
+    }
+
+    .slider {
+      width: 100%;
+      max-width: 800px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .slide {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .slide-content {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .slide-content img {
+      width: 45%;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .text {
+      flex: 1;
+      text-align: center;
+    }
+
+    h2 {
+      color: #ff6f61;
+      font-size: 24px;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+      font-family: 'Satisfy', cursive;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      flex: 1;
+    }
+
+    .btn:hover {
+      background-color: #ff3b3f;
+    }
+
+    .btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .centered-slide {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .love {
+      position: absolute;
+      font-size: 40px;
+      opacity: 0;
+      animation: popLove 1s forwards;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    @keyframes popLove {
+      0% {opacity: 0; transform: scale(0.5); top: 60%; left: 50%;}
+      50% {opacity: 1; transform: scale(1.2);}
+      100% {opacity: 0; top: 30%; transform: scale(0.7);}
+    }
+
+    .toast {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ff6f61;
+      color: white;
+      padding: 14px 25px;
+      border-radius: 25px;
+      font-size: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s;
+      z-index: 10;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      resize: none;
+    }
+
+   
+    .heart {
+  position: fixed;
+  top: -20px;
+  color: red;
+  font-size: 12px;
+  animation: fallHeart 5s linear infinite;
+  z-index: 999;
+}
+
+@keyframes fallHeart {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+    @media (max-width: 600px) {
+      body {
+        align-items: flex-start;
+      }
+
+      .slider {
+        margin-top: 50px;
+        height: auto;
+      }
+
+      .slide-content {
+        flex-direction: column-reverse;
+      }
+
+      .slide-content img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="slider">
+  <div class="slide active">
+    <div class="centered-slide">
+      <h2>🌸Bas Ek Nazar...</h2>
+      <p>Tujhe sirf dekha hai, jaana nahi abhi tak,
+        Phir bhi dil keh baitha... tu hi hai sabse khaas.
+        Na alfaaz mile, na wajah mili,
+        Par tujhe dekhte hi dil ko raah mili.</p>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="prevSlide()" disabled>Back</button>
+      <button class="btn" onclick="nextSlide()">Next</button>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slide-content">
+      <img src="img1.jpg" alt="Friend Image">
+      <div class="text">
+        <h2>🌙 Tere Baare Mein...</h2>
+        <p>Na jaane kaun hai tu, kahan se aayi hai,
+            Par har khayal mein bas teri hi parchhayi hai...
+            Tujhe dekha bhi nahi, phir bhi dil bechain hai,
+            Tu anjaani sahi, par dil ke sabse kareeb hai.
+            </p>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="prevSlide()">Back</button>
+      <button class="btn" onclick="nextSlide()">Next</button>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slide-content">
+      <img src="img2.jpg" alt="Friend Image">
+      <div class="text">
+        <h2>💫 Dil Ka Sukoon...</h2>
+        <p>Na jaane kyu tere khayalon mein kho jaata hoon,
+            Jise kabhi dekha nahi, usse dil laga baitha hoon...
+            Tu door sahi, par har pal paas lagti hai,
+            Tu meri nahi, par meri har baat mein tu hi basti hai. </p>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="prevSlide()">Back</button>
+      <button class="btn" onclick="nextSlide()">Next</button>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slide-content">
+      <img src="img3.jpg" alt="Friend Image">
+      <div class="text">
+        <h2>💖 Ek Sawal...</h2>
+        <p>Zindagi se kuch zyada nahi maangta hoon main,
+            Bas ek mulaqat tujhse... kisi subah, kisi shaam mein.
+            Agar tu bhi kabhi dil se kuch mehsoos kare,
+            Toh shayad likhi ho hum dono ki kahani kisi naam mein.</p>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="prevSlide()">Back</button>
+      <button class="btn" onclick="nextSlide()">Next</button>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slide-content">
+      <img src="img4.jpg" alt="Friend Image">
+      <div class="text">
+        <h2> Tere Jawab Ka Intezaar...</h2>
+        <p>Main rukunga yahi, kisi umeed ke saath,
+            Na pressure, na shikayat... sirf ek chhoti si baat.
+            Kya tu mujhe ek baar apna waqt degi?
+            Ek “Hi” hi kaafi hai... aage sab khud keh degi.</p>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="prevSlide()">Back</button>
+      <button class="btn" onclick="showToast()">I Love You💌</button>
+      <button class="btn" onclick="goToReply()">Reply ✍️</button>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="centered-slide">
+      <h2>Apna Message Likho ✍️</h2>
+      <textarea id="userReply" rows="5" placeholder="Yahaan likho jo tumhare dil mein hai..."></textarea>
+      <div class="btn-row">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <button class="btn" onclick="sendReply()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">I Love You Too ❤️</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function updateSlide() {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === currentSlide) slide.classList.add('active');
+      const backBtn = slide.querySelectorAll('.btn')[0];
+      if (backBtn) backBtn.disabled = currentSlide === 0;
+    });
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      updateSlide();
+      showLove();
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateSlide();
+      showLove();
+    }
+  }
+
+  function showLove() {
+    const heart = document.createElement("div");
+    heart.className = "love";
+    heart.innerText = "❤️";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1000);
+  }
+
+  function showToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3000);
+    showLove();
+  }
+
+  function goToReply() {
+    currentSlide++;
+    updateSlide();
+    showLove();
+  }
+
+  function sendReply() {
+    const message = document.getElementById("userReply").value.trim();
+    if (message === "") {
+      alert("Please write a reply before sending.");
+      return;
+    }
+    const encodedMsg = encodeURIComponent(message);
+    const phoneNumber = "918440003711";
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMsg}`;
+    window.open(whatsappURL, "_blank");
+  }
+
+  function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerText = '❤';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.fontSize = Math.random() * 6 + 8 + 'px'; // smaller size
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}
+
+setInterval(createHeart, 150); // more frequent for continuous rain
+
+</script>
+
+</body>
+</html>
